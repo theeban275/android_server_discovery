@@ -134,20 +134,4 @@ public class MainActivity extends Activity implements Runnable {
 		return InetAddress.getByAddress(quads).getHostAddress();
     }
     
-    // from: http://code.google.com/p/boxeeremote/wiki/AndroidUDP
-    private InetAddress getBroadcastAddress() throws IOException {
-    	WifiManager myWifiManager = (WifiManager) getSystemService(WIFI_SERVICE);
-    	DhcpInfo myDhcpInfo = myWifiManager.getDhcpInfo();
-    	if (myDhcpInfo == null) {
-    		System.out.println("Could not get broadcast address");
-    		return null;
-    	}
-    	int broadcast = (myDhcpInfo.ipAddress & myDhcpInfo.netmask)
-    				| ~myDhcpInfo.netmask;
-    	byte[] quads = new byte[4];
-    	for (int k = 0; k < 4; k++)
-    	quads[k] = (byte) ((broadcast >> k * 8) & 0xFF);
-    	return InetAddress.getByAddress(quads);
-    }
-    
 }
